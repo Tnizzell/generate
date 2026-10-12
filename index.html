@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Atelier Studio | 3D Design Marketplace</title>
+
+<style>
+:root {
+  --background: #0b0b10;
+  --surface: #191923;
+  --border: #30303c;
+  --text: #f5f4fa;
+  --muted: #a6a3b3;
+  --accent: #b99aff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 25px 6%;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: white;
+}
+
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 20px;
+}
+
+.primary {
+  background: var(--accent);
+  color: #141019;
+  font-weight: bold;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: white;
+}
+
+.hero {
+  padding: 110px 6%;
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      #322449,
+      transparent 45%
+    );
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  max-width: 850px;
+  margin: 25px 0;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+section {
+  padding: 60px 6%;
+}
+
+.section-title {
+  font-size: 38px;
+  margin: 15px 0 30px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-controls button {
+  background: var(--surface);
+  color: white;
+  border: 1px solid var(--border);
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0 25px;
+  scrollbar-width: thin;
+}
+
+.product {
+  flex: 0 0 310px;
+  scroll-snap-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.product-view {
+  height: 260px;
+  background:
+    radial-gradient(
+      circle,
+      #39304f,
+      #111118
+    );
+  position: relative;
+  cursor: grab;
+}
+
+.product-view canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product-info {
+  padding: 22px;
+}
+
+.product-info h3 {
+  margin: 0 0 12px;
+}
+
+.product-info p {
+  color: var(--muted);
+}
+
+.price {
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.product-info button {
+  width: 100%;
+  margin-top: 20px;
+  background: #30283f;
+  color: white;
+}
+
+.studio {
+  background: #14131c;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.studio-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.studio p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.generator {
+  background: #211d2d;
+  border: 1px solid #413750;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.generator textarea {
+  width: 100%;
+  height: 160px;
+  resize: vertical;
+  background: #111018;
+  border: 1px solid #494056;
+  border-radius: 10px;
+  padding: 15px;
+  color: white;
+}
+
+.generator button {
+  width: 100%;
+  margin-top: 15px;
+}
+
+#status {
+  color: var(--accent);
+  min-height: 20px;
+}
+
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.plan {
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.plan h3 {
+  color: var(--accent);
+}
+
+.plan p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+footer {
+  padding: 45px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+dialog {
+  background: #191923;
+  color: white;
+  border: 1px solid #514366;
+  border-radius: 16px;
+  width: min(600px, 95vw);
+  padding: 25px;
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,.85);
+}
+
+#viewer {
+  height: 350px;
+  background: #101018;
+}
+
+#viewer canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media(max-width: 750px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  nav {
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding: 75px 6%;
+  }
+
+  .studio-layout,
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+
+  .product {
+    flex-basis: 85%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    ATELIER<span>STUDIO</span>
+  </div>
+
+  <nav>
+    <a href="#marketplace">Marketplace</a>
+    <a href="#studio">Studio</a>
+    <a href="#pricing">Pricing</a>
+  </nav>
+
+  <button class="secondary" id="login">
+    Sign In
+  </button>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">
+    NEXT GENERATION 3D DESIGN
+  </div>
+
+  <h1>
+    Create Beyond<br>
+    <span>Imagination.</span>
+  </h1>
+
+  <p>
+    Explore digital creations, interact with
+    3D models, and bring your own ideas
+    into a new creative workspace.
+  </p>
+
+  <div class="actions">
+    <button class="primary"
+      onclick="location.href='#marketplace'">
+      Explore Marketplace
+    </button>
+
+    <button class="secondary"
+      onclick="location.href='#studio'">
+      Open Studio
+    </button>
+  </div>
+</section>
+
+<section id="marketplace">
+
+  <div class="eyebrow">
+    FEATURED COLLECTION
+  </div>
+
+  <div class="section-heading">
+    <h2 class="section-title">
+      Discover Designs
+    </h2>
+
+    <div class="carousel-controls">
+      <button id="previous">←</button>
+      <button id="next">→</button>
+    </div>
+  </div>
+
+  <div class="carousel" id="carousel"></div>
+
+</section>
+
+<section class="studio" id="studio">
+
+  <div class="studio-layout">
+
+    <div>
+      <div class="eyebrow">
+        AI CREATIVE WORKSPACE
+      </div>
+
+      <h2 class="section-title">
+        Your Ideas.<br>
+        Your Creations.
+      </h2>
+
+      <p>
+        Describe a decorative 3D object
+        and begin creating.
+        AI generation is currently
+        operating in demonstration mode.
+      </p>
+    </div>
+
+    <div class="generator">
+
+      <h3>3D Generator</h3>
+
+      <textarea
+        id="prompt"
+        maxlength="400"
+        placeholder="Describe your 3D creation...">
+      </textarea>
+
+      <button class="primary" id="generate">
+        Generate 3D Model
+      </button>
+
+      <p id="status" role="status"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="pricing">
+
+  <div class="eyebrow">
+    FLEXIBLE ACCESS
+  </div>
+
+  <h2 class="section-title">
+    Simple Pricing
+  </h2>
+
+  <div class="pricing">
+
+    <div class="plan">
+      <h3>Marketplace</h3>
+      <h2>$2–$3</h2>
+
+      <p>
+        Suggested pricing per digital
+        model. Downloads and checkout
+        will be enabled later.
+      </p>
+
+      <button class="secondary" disabled>
+        Coming Soon
+      </button>
+    </div>
+
+    <div class="plan">
+      <h3>Studio Credits</h3>
+      <h2>Coming Soon</h2>
+
+      <p>
+        Generate your own designs using
+        AI credits. Pricing will be
+        finalized after inference testing.
+      </p>
+
+      <button class="secondary" disabled>
+        Coming Soon
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Atelier Studio.
+  All rights reserved.
+</footer>
+
+<dialog id="productModal">
+
+  <button id="closeModal">
+    Close ✕
+  </button>
+
+  <h2 id="modalTitle"></h2>
+
+  <div id="viewer"></div>
+
+  <p>
+    Interactive 3D concept preview.
+  </p>
+
+  <button class="primary" disabled>
+    Purchase Coming Soon
+  </button>
+
+</dialog>
+
+<script type="module">
+
+import * as THREE from
+"https://esm.sh/three@0.169.0";
+
+const products = [
+  {
+    name: "Orbit Sculpture",
+    price: 3,
+    type: "torus",
+    color: 0xb99aff
+  },
+  {
+    name: "Prism Design",
+    price: 2,
+    type: "icosahedron",
+    color: 0x80d8d0
+  },
+  {
+    name: "Halo Pendant",
+    price: 3,
+    type: "knot",
+    color: 0xffaacc
+  },
+  {
+    name: "Crystal Form",
+    price: 2,
+    type: "octahedron",
+    color: 0xffcc88
+  }
+];
+
+const carousel =
+  document.getElementById("carousel");
+
+const activeScenes = [];
+
+function createGeometry(type) {
+
+  if (type === "torus") {
+    return new THREE.TorusGeometry(
+      1, .3, 24, 90
+    );
+  }
+
+  if (type === "icosahedron") {
+    return new THREE.IcosahedronGeometry(
+      1.2, 1
+    );
+  }
+
+  if (type === "knot") {
+    return new THREE.TorusKnotGeometry(
+      .85, .25, 120, 16
+    );
+  }
+
+  return new THREE.OctahedronGeometry(
+    1.3, 1
+  );
+}
+
+function createPreview(container, product) {
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    40, 1, .1, 100
+  );
+
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+  });
+
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
+
+  container.appendChild(renderer.domElement);
+
+  const geometry =
+    createGeometry(product.type);
+
+  const material =
+    new THREE.MeshStandardMaterial({
+      color: product.color,
+      metalness: .35,
+      roughness: .25
+    });
+
+  const model =
+    new THREE.Mesh(geometry, material);
+
+  scene.add(model);
+
+  const ambient =
+    new THREE.HemisphereLight(
+      0xffffff,
+      0x555577,
+      2
+    );
+
+  scene.add(ambient);
+
+  const light =
+    new THREE.DirectionalLight(
+      0xffffff,
+      3
+    );
+
+  light.position.set(2, 3, 5);
+
+  scene.add(light);
+
+  let dragging = false;
+  let lastX = 0;
+
+  container.addEventListener(
+    "pointerdown",
+    event => {
+      dragging = true;
+      lastX = event.clientX;
+      container.setPointerCapture(
+        event.pointerId
+      );
+    }
+  );
+
+  container.addEventListener(
+    "pointerup",
+    () => dragging = false
+  );
+
+  container.addEventListener(
+    "pointercancel",
+    () => dragging = false
+  );
+
+  container.addEventListener(
+    "pointermove",
+    event => {
+
+      if (!dragging) return;
+
+      model.rotation.y +=
+        (event.clientX - lastX) * .01;
+
+      lastX = event.clientX;
+    }
+  );
+
+  const preview = {
+    container,
+    scene,
+    camera,
+    renderer,
+    model,
+    isDragging: () => dragging
+  };
+
+  activeScenes.push(preview);
+
+  return preview;
+}
+
+function animate() {
+
+  requestAnimationFrame(animate);
+
+  for (const preview of activeScenes) {
+
+    if (!preview.container.isConnected) {
+      continue;
+    }
+
+    const width =
+      preview.container.clientWidth;
+
+    const height =
+      preview.container.clientHeight;
+
+    if (!width || !height) continue;
+
+    preview.renderer.setSize(
+      width,
+      height,
+      false
+    );
+
+    preview.camera.aspect =
+      width / height;
+
+    preview.camera.updateProjectionMatrix();
+
+    if (!preview.isDragging()) {
+      preview.model.rotation.y += .005;
+    }
+
+    preview.renderer.render(
+      preview.scene,
+      preview.camera
+    );
+  }
+}
+
+animate();
+
+const modal =
+  document.getElementById("productModal");
+
+let modalPreview = null;
+
+function openProduct(product) {
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent = product.name;
+
+  const viewer =
+    document.getElementById("viewer");
+
+  if (modalPreview) {
+
+    const index =
+      activeScenes.indexOf(modalPreview);
+
+    if (index !== -1) {
+      activeScenes.splice(index, 1);
+    }
+
+    modalPreview.renderer.dispose();
+
+    modalPreview.model.geometry.dispose();
+
+    modalPreview.model.material.dispose();
+
+    modalPreview = null;
+  }
+
+  viewer.replaceChildren();
+
+  modalPreview =
+    createPreview(viewer, product);
+
+  modal.showModal();
+}
+
+products.forEach(product => {
+
+  const card =
+    document.createElement("article");
+
+  card.className = "product";
+
+  const view =
+    document.createElement("div");
+
+  view.className = "product-view";
+
+  const info =
+    document.createElement("div");
+
+  info.className = "product-info";
+
+  const title =
+    document.createElement("h3");
+
+  title.textContent = product.name;
+
+  const price =
+    document.createElement("div");
+
+  price.className = "price";
+
+  price.textContent = "$" + product.price;
+
+  const button =
+    document.createElement("button");
+
+  button.textContent = "View 3D Model";
+
+  button.addEventListener(
+    "click",
+    () => openProduct(product)
+  );
+
+  info.append(title, price, button);
+
+  card.append(view, info);
+
+  carousel.appendChild(card);
+
+  createPreview(view, product);
+});
+
+document.getElementById("next")
+  .addEventListener("click", () => {
+
+    carousel.scrollBy({
+      left: 330,
+      behavior: "smooth"
+    });
+
+  });
+
+document.getElementById("previous")
+  .addEventListener("click", () => {
+
+    carousel.scrollBy({
+      left: -330,
+      behavior: "smooth"
+    });
+
+  });
+
+document.getElementById("closeModal")
+  .addEventListener("click", () => {
+
+    modal.close();
+
+  });
+
+document.getElementById("generate")
+  .addEventListener("click", () => {
+
+    const prompt =
+      document.getElementById("prompt")
+        .value.trim();
+
+    const status =
+      document.getElementById("status");
+
+    if (!prompt) {
+      status.textContent =
+        "Please describe your creation.";
+      return;
+    }
+
+    status.textContent =
+      "Demo request received. " +
+      "AI generation is not connected yet.";
+
+  });
+
+document.getElementById("login")
+  .addEventListener("click", () => {
+
+    alert(
+      "Account registration will be " +
+      "available after Supabase integration."
+    );
+
+  });
+
+</script>
+
+</body>
+</html>
