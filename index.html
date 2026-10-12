@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>Atelier Studio | 3D Design Marketplace</title>
+<title>Atelier Studio | 3D Marketplace</title>
 
 <style>
 :root {
-  --background: #0b0b10;
-  --surface: #191923;
-  --border: #30303c;
+  --bg: #0b0b10;
+  --panel: #191923;
+  --line: #30303c;
   --text: #f5f4fa;
   --muted: #a6a3b3;
   --accent: #b99aff;
@@ -26,31 +29,55 @@ html {
 
 body {
   margin: 0;
-  background: var(--background);
+  background: var(--bg);
   color: var(--text);
   font-family: Arial, sans-serif;
 }
 
-button, input, textarea {
+button,
+input,
+textarea {
   font: inherit;
 }
 
 button {
   cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 20px;
 }
 
 button:disabled {
-  opacity: .5;
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
+.primary {
+  background: var(--accent);
+  color: #141019;
+  font-weight: bold;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: white;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* HEADER */
+
 header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
   padding: 25px 6%;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -65,7 +92,7 @@ header {
 
 nav {
   display: flex;
-  gap: 25px;
+  gap: 24px;
 }
 
 nav a {
@@ -77,23 +104,20 @@ nav a:hover {
   color: white;
 }
 
-button {
-  border: 0;
-  border-radius: 9px;
-  padding: 12px 20px;
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.primary {
-  background: var(--accent);
-  color: #141019;
-  font-weight: bold;
+.account small {
+  color: var(--muted);
+  max-width: 220px;
+  overflow-wrap: anywhere;
 }
 
-.secondary {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: white;
-}
+/* HERO */
 
 .hero {
   padding: 110px 6%;
@@ -124,18 +148,26 @@ button {
   color: var(--accent);
 }
 
-.hero p {
+.hero p,
+.studio p,
+.plan p {
   color: var(--muted);
-  font-size: 18px;
-  max-width: 600px;
   line-height: 1.7;
+}
+
+.hero p {
+  max-width: 600px;
+  font-size: 18px;
 }
 
 .actions {
   display: flex;
   gap: 12px;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
+
+/* MARKETPLACE */
 
 section {
   padding: 60px 6%;
@@ -150,6 +182,7 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
 
 .carousel-controls {
@@ -158,9 +191,9 @@ section {
 }
 
 .carousel-controls button {
-  background: var(--surface);
+  background: var(--panel);
   color: white;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
 }
 
 .carousel {
@@ -169,14 +202,13 @@ section {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 10px 0 25px;
-  scrollbar-width: thin;
 }
 
 .product {
   flex: 0 0 310px;
   scroll-snap-align: start;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -189,11 +221,12 @@ section {
       #39304f,
       #111118
     );
-  position: relative;
   cursor: grab;
+  touch-action: pan-y;
 }
 
-.product-view canvas {
+.product-view canvas,
+#viewer canvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -205,10 +238,6 @@ section {
 
 .product-info h3 {
   margin: 0 0 12px;
-}
-
-.product-info p {
-  color: var(--muted);
 }
 
 .price {
@@ -224,10 +253,12 @@ section {
   color: white;
 }
 
+/* STUDIO */
+
 .studio {
   background: #14131c;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .studio-layout {
@@ -235,11 +266,6 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 50px;
   align-items: center;
-}
-
-.studio p {
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .generator {
@@ -265,10 +291,13 @@ section {
   margin-top: 15px;
 }
 
-#status {
+.status {
   color: var(--accent);
   min-height: 20px;
+  overflow-wrap: anywhere;
 }
+
+/* PRICING */
 
 .pricing {
   display: grid;
@@ -278,8 +307,8 @@ section {
 
 .plan {
   padding: 30px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 16px;
 }
 
@@ -287,29 +316,30 @@ section {
   color: var(--accent);
 }
 
-.plan p {
-  color: var(--muted);
-  line-height: 1.6;
-}
+/* FOOTER */
 
 footer {
   padding: 45px;
   text-align: center;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   color: var(--muted);
 }
 
+/* MODALS */
+
 dialog {
-  background: #191923;
+  background: var(--panel);
   color: white;
   border: 1px solid #514366;
   border-radius: 16px;
   width: min(600px, 95vw);
   padding: 25px;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 dialog::backdrop {
-  background: rgba(0,0,0,.85);
+  background: rgba(0, 0, 0, 0.85);
 }
 
 #viewer {
@@ -317,17 +347,43 @@ dialog::backdrop {
   background: #101018;
 }
 
-#viewer canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
-@media(max-width: 750px) {
-  header {
-    flex-wrap: wrap;
-  }
+.auth-form {
+  display: grid;
+  gap: 13px;
+}
 
+.auth-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+}
+
+.auth-form input {
+  width: 100%;
+  background: #111018;
+  border: 1px solid #494056;
+  border-radius: 9px;
+  padding: 12px;
+  color: white;
+}
+
+.auth-switch {
+  background: none;
+  color: var(--accent);
+  padding: 10px 0;
+  text-align: left;
+}
+
+/* MOBILE */
+
+@media (max-width: 750px) {
   nav {
     gap: 12px;
     font-size: 13px;
@@ -352,6 +408,7 @@ dialog::backdrop {
 <body>
 
 <header>
+
   <div class="logo">
     ATELIER<span>STUDIO</span>
   </div>
@@ -362,12 +419,33 @@ dialog::backdrop {
     <a href="#pricing">Pricing</a>
   </nav>
 
-  <button class="secondary" id="login">
-    Sign In
-  </button>
+  <div class="account">
+
+    <small id="accountEmail"></small>
+
+    <button
+      class="secondary"
+      id="login"
+    >
+      Sign In
+    </button>
+
+    <button
+      class="secondary"
+      id="logout"
+      hidden
+    >
+      Sign Out
+    </button>
+
+  </div>
+
 </header>
 
+<!-- HERO -->
+
 <section class="hero">
+
   <div class="eyebrow">
     NEXT GENERATION 3D DESIGN
   </div>
@@ -378,23 +456,33 @@ dialog::backdrop {
   </h1>
 
   <p>
-    Explore digital creations, interact with
-    3D models, and bring your own ideas
+    Explore digital creations,
+    interact with 3D models,
+    and bring your own ideas
     into a new creative workspace.
   </p>
 
   <div class="actions">
-    <button class="primary"
-      onclick="location.href='#marketplace'">
+
+    <button
+      class="primary"
+      onclick="location.href='#marketplace'"
+    >
       Explore Marketplace
     </button>
 
-    <button class="secondary"
-      onclick="location.href='#studio'">
+    <button
+      class="secondary"
+      onclick="location.href='#studio'"
+    >
       Open Studio
     </button>
+
   </div>
+
 </section>
+
+<!-- MARKETPLACE -->
 
 <section id="marketplace">
 
@@ -403,25 +491,49 @@ dialog::backdrop {
   </div>
 
   <div class="section-heading">
+
     <h2 class="section-title">
       Discover Designs
     </h2>
 
     <div class="carousel-controls">
-      <button id="previous">←</button>
-      <button id="next">→</button>
+
+      <button
+        id="previous"
+        aria-label="Previous products"
+      >
+        ←
+      </button>
+
+      <button
+        id="next"
+        aria-label="Next products"
+      >
+        →
+      </button>
+
     </div>
+
   </div>
 
-  <div class="carousel" id="carousel"></div>
+  <div
+    class="carousel"
+    id="carousel"
+  ></div>
 
 </section>
 
-<section class="studio" id="studio">
+<!-- GENERATOR -->
+
+<section
+  class="studio"
+  id="studio"
+>
 
   <div class="studio-layout">
 
     <div>
+
       <div class="eyebrow">
         AI CREATIVE WORKSPACE
       </div>
@@ -437,6 +549,7 @@ dialog::backdrop {
         AI generation is currently
         operating in demonstration mode.
       </p>
+
     </div>
 
     <div class="generator">
@@ -446,20 +559,29 @@ dialog::backdrop {
       <textarea
         id="prompt"
         maxlength="400"
-        placeholder="Describe your 3D creation...">
-      </textarea>
+        placeholder="Describe your 3D creation..."
+      ></textarea>
 
-      <button class="primary" id="generate">
+      <button
+        class="primary"
+        id="generate"
+      >
         Generate 3D Model
       </button>
 
-      <p id="status" role="status"></p>
+      <p
+        class="status"
+        id="status"
+        role="status"
+      ></p>
 
     </div>
 
   </div>
 
 </section>
+
+<!-- PRICING -->
 
 <section id="pricing">
 
@@ -474,7 +596,9 @@ dialog::backdrop {
   <div class="pricing">
 
     <div class="plan">
+
       <h3>Marketplace</h3>
+
       <h2>$2–$3</h2>
 
       <p>
@@ -483,24 +607,35 @@ dialog::backdrop {
         will be enabled later.
       </p>
 
-      <button class="secondary" disabled>
+      <button
+        class="secondary"
+        disabled
+      >
         Coming Soon
       </button>
+
     </div>
 
     <div class="plan">
+
       <h3>Studio Credits</h3>
+
       <h2>Coming Soon</h2>
 
       <p>
-        Generate your own designs using
-        AI credits. Pricing will be
-        finalized after inference testing.
+        Generate your own designs
+        using AI credits.
+        Pricing will be finalized
+        after inference testing.
       </p>
 
-      <button class="secondary" disabled>
+      <button
+        class="secondary"
+        disabled
+      >
         Coming Soon
       </button>
+
     </div>
 
   </div>
@@ -512,13 +647,22 @@ dialog::backdrop {
   All rights reserved.
 </footer>
 
+<!-- PRODUCT MODAL -->
+
 <dialog id="productModal">
 
-  <button id="closeModal">
-    Close ✕
-  </button>
+  <div class="modal-top">
 
-  <h2 id="modalTitle"></h2>
+    <h2 id="modalTitle"></h2>
+
+    <button
+      class="secondary"
+      id="closeModal"
+    >
+      Close ✕
+    </button>
+
+  </div>
 
   <div id="viewer"></div>
 
@@ -526,118 +670,250 @@ dialog::backdrop {
     Interactive 3D concept preview.
   </p>
 
-  <button class="primary" disabled>
+  <button
+    class="primary"
+    disabled
+  >
     Purchase Coming Soon
   </button>
 
 </dialog>
+
+<!-- AUTHENTICATION MODAL -->
+
+<dialog id="authModal">
+
+  <div class="modal-top">
+
+    <h2 id="authTitle">
+      Sign In
+    </h2>
+
+    <button
+      class="secondary"
+      id="closeAuth"
+    >
+      Close ✕
+    </button>
+
+  </div>
+
+  <form
+    id="authForm"
+    class="auth-form"
+  >
+
+    <label>
+      Email
+
+      <input
+        id="authEmail"
+        type="email"
+        autocomplete="email"
+        required
+      >
+    </label>
+
+    <label>
+      Password
+
+      <input
+        id="authPassword"
+        type="password"
+        minlength="6"
+        autocomplete="current-password"
+        required
+      >
+    </label>
+
+    <button
+      class="primary"
+      id="authSubmit"
+      type="submit"
+    >
+      Sign In
+    </button>
+
+  </form>
+
+  <button
+    class="auth-switch"
+    id="authSwitch"
+  >
+    Need an account? Sign Up
+  </button>
+
+  <p
+    class="status"
+    id="authStatus"
+    role="status"
+  ></p>
+
+</dialog>
+
+<!-- JAVASCRIPT -->
 
 <script type="module">
 
 import * as THREE from
 "https://esm.sh/three@0.169.0";
 
+import {
+  createClient
+} from
+"https://esm.sh/@supabase/supabase-js@2";
+
+/* SUPABASE CONFIGURATION */
+
+const supabase = createClient(
+
+  "https://waohjdlrlvrjlkxrhcxp.supabase.co",
+
+  "sb_publishable_eyorczH0FSzoNHSUHXN8kQ_Mn0iYaqb",
+
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
+
+);
+
+const $ = id =>
+  document.getElementById(id);
+
+/* PRODUCTS */
+
 const products = [
+
   {
     name: "Orbit Sculpture",
     price: 3,
     type: "torus",
     color: 0xb99aff
   },
+
   {
     name: "Prism Design",
     price: 2,
     type: "icosahedron",
     color: 0x80d8d0
   },
+
   {
     name: "Halo Pendant",
     price: 3,
     type: "knot",
     color: 0xffaacc
   },
+
   {
     name: "Crystal Form",
     price: 2,
     type: "octahedron",
     color: 0xffcc88
   }
-];
 
-const carousel =
-  document.getElementById("carousel");
+];
 
 const activeScenes = [];
 
-function createGeometry(type) {
+/* GEOMETRY */
+
+function geometry(type) {
 
   if (type === "torus") {
+
     return new THREE.TorusGeometry(
-      1, .3, 24, 90
+      1,
+      0.3,
+      24,
+      90
     );
+
   }
 
   if (type === "icosahedron") {
+
     return new THREE.IcosahedronGeometry(
-      1.2, 1
+      1.2,
+      1
     );
+
   }
 
   if (type === "knot") {
+
     return new THREE.TorusKnotGeometry(
-      .85, .25, 120, 16
+      0.85,
+      0.25,
+      120,
+      16
     );
+
   }
 
   return new THREE.OctahedronGeometry(
-    1.3, 1
+    1.3,
+    1
   );
+
 }
+
+/* 3D VIEWER */
 
 function createPreview(container, product) {
 
   const scene = new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(
-    40, 1, .1, 100
-  );
+  const camera =
+    new THREE.PerspectiveCamera(
+      40,
+      1,
+      0.1,
+      100
+    );
 
   camera.position.z = 5;
 
-  const renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: true
-  });
-
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
-  );
-
-  container.appendChild(renderer.domElement);
-
-  const geometry =
-    createGeometry(product.type);
-
-  const material =
-    new THREE.MeshStandardMaterial({
-      color: product.color,
-      metalness: .35,
-      roughness: .25
+  const renderer =
+    new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true
     });
 
-  const model =
-    new THREE.Mesh(geometry, material);
+  renderer.setPixelRatio(
+    Math.min(
+      window.devicePixelRatio,
+      2
+    )
+  );
+
+  container.append(renderer.domElement);
+
+  const model = new THREE.Mesh(
+
+    geometry(product.type),
+
+    new THREE.MeshStandardMaterial({
+      color: product.color,
+      metalness: 0.35,
+      roughness: 0.25
+    })
+
+  );
 
   scene.add(model);
 
-  const ambient =
+  scene.add(
     new THREE.HemisphereLight(
       0xffffff,
       0x555577,
       2
-    );
-
-  scene.add(ambient);
+    )
+  );
 
   const light =
     new THREE.DirectionalLight(
@@ -655,11 +931,14 @@ function createPreview(container, product) {
   container.addEventListener(
     "pointerdown",
     event => {
+
       dragging = true;
       lastX = event.clientX;
+
       container.setPointerCapture(
         event.pointerId
       );
+
     }
   );
 
@@ -680,9 +959,10 @@ function createPreview(container, product) {
       if (!dragging) return;
 
       model.rotation.y +=
-        (event.clientX - lastX) * .01;
+        (event.clientX - lastX) * 0.01;
 
       lastX = event.clientX;
+
     }
   );
 
@@ -698,7 +978,10 @@ function createPreview(container, product) {
   activeScenes.push(preview);
 
   return preview;
+
 }
+
+/* ANIMATION */
 
 function animate() {
 
@@ -706,7 +989,11 @@ function animate() {
 
   for (const preview of activeScenes) {
 
-    if (!preview.container.isConnected) {
+    if (
+      !preview.container.isConnected ||
+      !preview.container.clientWidth ||
+      !preview.container.clientHeight
+    ) {
       continue;
     }
 
@@ -715,8 +1002,6 @@ function animate() {
 
     const height =
       preview.container.clientHeight;
-
-    if (!width || !height) continue;
 
     preview.renderer.setSize(
       width,
@@ -730,31 +1015,28 @@ function animate() {
     preview.camera.updateProjectionMatrix();
 
     if (!preview.isDragging()) {
-      preview.model.rotation.y += .005;
+      preview.model.rotation.y += 0.005;
     }
 
     preview.renderer.render(
       preview.scene,
       preview.camera
     );
+
   }
+
 }
 
 animate();
 
-const modal =
-  document.getElementById("productModal");
+/* PRODUCT MODAL */
 
 let modalPreview = null;
 
 function openProduct(product) {
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent = product.name;
-
-  const viewer =
-    document.getElementById("viewer");
+  $("modalTitle").textContent =
+    product.name;
 
   if (modalPreview) {
 
@@ -771,18 +1053,23 @@ function openProduct(product) {
 
     modalPreview.model.material.dispose();
 
-    modalPreview = null;
   }
 
-  viewer.replaceChildren();
+  $("viewer").replaceChildren();
 
   modalPreview =
-    createPreview(viewer, product);
+    createPreview(
+      $("viewer"),
+      product
+    );
 
-  modal.showModal();
+  $("productModal").showModal();
+
 }
 
-products.forEach(product => {
+/* BUILD MARKETPLACE */
+
+for (const product of products) {
 
   const card =
     document.createElement("article");
@@ -809,82 +1096,286 @@ products.forEach(product => {
 
   price.className = "price";
 
-  price.textContent = "$" + product.price;
+  price.textContent =
+    "$" + product.price;
 
   const button =
     document.createElement("button");
 
-  button.textContent = "View 3D Model";
+  button.textContent =
+    "View 3D Model";
 
   button.addEventListener(
     "click",
     () => openProduct(product)
   );
 
-  info.append(title, price, button);
+  info.append(
+    title,
+    price,
+    button
+  );
 
-  card.append(view, info);
+  card.append(
+    view,
+    info
+  );
 
-  carousel.appendChild(card);
+  $("carousel").append(card);
 
   createPreview(view, product);
-});
 
-document.getElementById("next")
-  .addEventListener("click", () => {
+}
 
-    carousel.scrollBy({
-      left: 330,
-      behavior: "smooth"
-    });
+/* CAROUSEL CONTROLS */
 
+$("next").onclick = () => {
+
+  $("carousel").scrollBy({
+    left: 330,
+    behavior: "smooth"
   });
 
-document.getElementById("previous")
-  .addEventListener("click", () => {
+};
 
-    carousel.scrollBy({
-      left: -330,
-      behavior: "smooth"
-    });
+$("previous").onclick = () => {
 
+  $("carousel").scrollBy({
+    left: -330,
+    behavior: "smooth"
   });
 
-document.getElementById("closeModal")
-  .addEventListener("click", () => {
+};
 
-    modal.close();
+$("closeModal").onclick = () => {
 
-  });
+  $("productModal").close();
 
-document.getElementById("generate")
-  .addEventListener("click", () => {
+};
 
-    const prompt =
-      document.getElementById("prompt")
-        .value.trim();
+/* MOCK GENERATION */
 
-    const status =
-      document.getElementById("status");
+$("generate").onclick = () => {
 
-    if (!prompt) {
-      status.textContent =
-        "Please describe your creation.";
-      return;
+  const prompt =
+    $("prompt").value.trim();
+
+  $("status").textContent = prompt
+    ? "Demo request received. AI generation is not connected yet."
+    : "Please describe your creation.";
+
+};
+
+/* AUTHENTICATION */
+
+let signup = false;
+
+function renderAuthMode() {
+
+  $("authTitle").textContent =
+    signup
+      ? "Create Account"
+      : "Sign In";
+
+  $("authSubmit").textContent =
+    signup
+      ? "Sign Up"
+      : "Sign In";
+
+  $("authSwitch").textContent =
+    signup
+      ? "Already have an account? Sign In"
+      : "Need an account? Sign Up";
+
+  $("authPassword").autocomplete =
+    signup
+      ? "new-password"
+      : "current-password";
+
+  $("authStatus").textContent = "";
+
+}
+
+/* OPEN LOGIN */
+
+$("login").onclick = () => {
+
+  signup = false;
+
+  renderAuthMode();
+
+  $("authModal").showModal();
+
+};
+
+/* CLOSE LOGIN */
+
+$("closeAuth").onclick = () => {
+
+  $("authModal").close();
+
+};
+
+/* SWITCH LOGIN / SIGNUP */
+
+$("authSwitch").onclick = () => {
+
+  signup = !signup;
+
+  renderAuthMode();
+
+};
+
+/* DISPLAY CURRENT USER */
+
+function updateUser(user) {
+
+  $("accountEmail").textContent =
+    user?.email || "";
+
+  $("login").hidden = !!user;
+
+  $("logout").hidden = !user;
+
+}
+
+/* SUBMIT LOGIN OR SIGNUP */
+
+$("authForm").addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    const button =
+      $("authSubmit");
+
+    button.disabled = true;
+
+    $("authStatus").textContent =
+      "Please wait...";
+
+    const email =
+      $("authEmail").value.trim();
+
+    const password =
+      $("authPassword").value;
+
+    try {
+
+      let result;
+
+      if (signup) {
+
+        result =
+          await supabase.auth.signUp({
+
+            email,
+
+            password,
+
+            options: {
+
+              emailRedirectTo:
+                location.origin +
+                location.pathname
+
+            }
+
+          });
+
+      } else {
+
+        result =
+          await supabase.auth
+            .signInWithPassword({
+
+              email,
+
+              password
+
+            });
+
+      }
+
+      const { data, error } = result;
+
+      if (error) {
+        throw error;
+      }
+
+      if (signup) {
+
+        $("authStatus").textContent =
+          data.session
+            ? "Account created and signed in."
+            : "Check your email for a confirmation link, then sign in.";
+
+      } else {
+
+        $("authStatus").textContent =
+          "Signed in successfully.";
+
+        $("authModal").close();
+
+      }
+
+      $("authPassword").value = "";
+
+    } catch (error) {
+
+      $("authStatus").textContent =
+        error.message ||
+        "Authentication failed. Please try again.";
+
+    } finally {
+
+      button.disabled = false;
+
     }
 
-    status.textContent =
-      "Demo request received. " +
-      "AI generation is not connected yet.";
+  }
+);
 
-  });
+/* SIGN OUT */
 
-document.getElementById("login")
-  .addEventListener("click", () => {
+$("logout").onclick = async () => {
 
-    alert(
-      "Account registration will be " +
-      "available after Supabase integration."
+  const { error } =
+    await supabase.auth.signOut();
+
+  if (error) {
+    alert(error.message);
+  }
+
+};
+
+/* SESSION CHANGES */
+
+supabase.auth.onAuthStateChange(
+  (_event, session) => {
+
+    updateUser(
+      session?.user
+    );
+
+  }
+);
+
+/* RESTORE LOGIN ON REFRESH */
+
+supabase.auth.getSession()
+  .then(({ data, error }) => {
+
+    if (error) {
+      console.error(
+        "Session error",
+        error
+      );
+    }
+
+    updateUser(
+      data?.session?.user
     );
 
   });
